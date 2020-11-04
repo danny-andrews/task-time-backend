@@ -1,4 +1,8 @@
 {
+  "name": "task-time-backend",
+  "version": "0.0.1",
+  "private": true,
+  "main": "index.js",
   "dependencies": {
     "@hapi/hapi": "^20.0.1",
     "automerge": "^0.14.1",
