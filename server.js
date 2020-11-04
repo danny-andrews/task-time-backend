@@ -6,7 +6,7 @@ const faunadb = require("faunadb");
 const q = faunadb.query;
 const Y = require("yjs");
 
-const port = process.env.PORT || 3004;
+const port = 3004;
 
 const client = new faunadb.Client({
   secret: "fnAD5dTZtZACCXhZj4HzSPWropUY3Z2Rf22u3EZc",
