@@ -69,14 +69,17 @@ const server = http.createServer((request, response) => {
   response.end("okay");
 });
 
-wss.on("connection", utils.setupWSConnection);
-
-server.on("upgrade", (request, socket, head) => {
-  const handleAuth = (ws) => {
-    wss.emit("connection", ws, request);
-  };
-  wss.handleUpgrade(request, socket, head, handleAuth);
+wss.on("connection", (...args) => {
+  console.log("connected");
+  utils.setupWSConnection(...args);
 });
+
+// server.on("upgrade", (request, socket, head) => {
+//   const handleAuth = (ws) => {
+//     wss.emit("connection", ws, request);
+//   };
+//   wss.handleUpgrade(request, socket, head, handleAuth);
+// });
 
 server.listen(port);
 
