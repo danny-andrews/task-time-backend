@@ -1,11 +1,11 @@
 const WebSocket = require("ws");
+const http = require("http");
 const utils = require("y-websocket/bin/utils.js");
 const faunadb = require("faunadb");
 const Y = require("yjs");
 
 const q = faunadb.query;
 const port = process.env.PORT || 3004;
-const wss = new WebSocket.Server({ port });
 
 const client = new faunadb.Client({
   secret: "fnAD5dTZtZACCXhZj4HzSPWropUY3Z2Rf22u3EZc",
@@ -63,10 +63,26 @@ utils.setPersistence({
   },
 });
 
+const server = http.createServer((request, response) => {
+  response.writeHead(200, { "Content-Type": "text/plain" });
+  response.end("heyo");
+});
+
+const wss = new WebSocket.Server({ server });
+
 wss.on("connection", (...args) => {
   console.log("connected");
   utils.setupWSConnection(...args);
 });
+
+// server.on("upgrade", (request, socket, head) => {
+//   const handleAuth = (ws) => {
+//     wss.emit("connection", ws, request);
+//   };
+//   wss.handleUpgrade(request, socket, head, handleAuth);
+// });
+
+server.listen(port);
 
 console.log("running on port", port);
 
