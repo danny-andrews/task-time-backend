@@ -75,12 +75,12 @@ wss.on("connection", (...args) => {
   utils.setupWSConnection(...args);
 });
 
-// server.on("upgrade", (request, socket, head) => {
-//   const handleAuth = (ws) => {
-//     wss.emit("connection", ws, request);
-//   };
-//   wss.handleUpgrade(request, socket, head, handleAuth);
-// });
+server.on("upgrade", (request, socket, head) => {
+  const handleAuth = (ws) => {
+    wss.emit("connection", ws, request);
+  };
+  wss.handleUpgrade(request, socket, head, handleAuth);
+});
 
 server.listen(port);
 
