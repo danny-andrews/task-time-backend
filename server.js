@@ -8,7 +8,7 @@ const q = faunadb.query;
 const port = process.env.PORT || 3004;
 
 const client = new faunadb.Client({
-  secret: "fnAD5dTZtZACCXhZj4HzSPWropUY3Z2Rf22u3EZc",
+  secret: process.env.FAUNADB_SECRET,
 });
 
 const getDocRefId = async (userId) => {
@@ -57,6 +57,9 @@ utils.setPersistence({
       q.Update(q.Ref(q.Collection("default"), id), {
         data: {
           doc: Y.encodeStateAsUpdate(ydoc),
+          json: {
+            tasks: ydoc.getArray("tasks").toJSON()
+          },
         },
       })
     );
