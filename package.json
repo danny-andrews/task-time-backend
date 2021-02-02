@@ -6,6 +6,7 @@
     "start": "YPERSISTENCE=./db node ./node_modules/y-websocket/bin/server.js"
   },
   "dependencies": {
-    "y-websocket": "^1.3.5"
+    "y-websocket": "^1.3.5",
+    "yjs": "^13.4.14"
   }
 }
